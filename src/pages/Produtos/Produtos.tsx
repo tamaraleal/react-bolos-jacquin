@@ -69,7 +69,7 @@ export default function Produtos() {
                     {
                         Bolos.map((b: Bolos) => (
                             <div className="card_produto">
-                                <img src={`http://localhost:3000/static${b.imagens[0]}`} alt="Uma fatia de bolo de chocolate belga" />
+                                <img src={`http://localhost:3000/static/${b.imagens[0]}`} alt="Uma fatia de bolo de chocolate belga" />
                                 <h2>{b.nome}</h2>
                                 <p>{ }</p>
                                 <span>{b.preco}</span>
