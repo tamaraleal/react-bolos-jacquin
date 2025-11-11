@@ -71,17 +71,12 @@ export default function Produtos() {
                             <div className="card_produto">
                                 <img src={`http://localhost:3000/static/${b.imagens[0]}`} alt="Uma fatia de bolo de chocolate belga" />
                                 <h2>{b.nome}</h2>
-                                <p>{ }</p>
+                                <p>{b.descricao}</p>
                                 <span>{b.preco}</span>
                             </div>
                         ))
                     }
-                    <div className="card_produto">
-                        <img src={choc_belga} alt="Uma fatia de bolo de chocolate belga" />
-                        <h2>Chocolate Belga</h2>
-                        <p>Bolo macio de chocolate, aplicado granulado que traz crocância e um sabor irresistível.</p>
-                        <span>R$ 80,00/kg.</span>
-                    </div>
+                   
                 </section>
             </section>
 
