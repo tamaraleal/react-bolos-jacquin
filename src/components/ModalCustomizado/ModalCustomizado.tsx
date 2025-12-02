@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap'
 import './ModalCustomizado.css'
 import type { ModalCustomizadoProps } from '../../types/ModalCustomizadoProps'
 
-export default function ModalCustomizado({ mostrarModalQuando, aoCancelar, exibirConteudoCentralizado, titulo, corpo, customizarBotoes, textoBotaoCancelamento, textoBotaoComfimacao, aoConfirmar }: ModalCustomizadoProps) {
+export default function ModalCustomizado({ mostrarModalQuando, aoCancelar, exibirConteudoCentralizado, titulo, corpo, customizarBotoes, textoBotaoCancelamento, textoBotaoConfimacao, aoConfirmar }: ModalCustomizadoProps) {
     return (
         <Modal
             style={{ fontFamily: "Bellota, system-ui" }}
@@ -23,7 +23,7 @@ export default function ModalCustomizado({ mostrarModalQuando, aoCancelar, exibi
                     )
                 }
                 <button onClick={customizarBotoes ? aoConfirmar : aoCancelar} className='botaoSubmitModal'>
-                    {customizarBotoes ? textoBotaoComfimacao : "OK"}
+                    {customizarBotoes ? textoBotaoConfimacao : "OK"}
                 </button>
             </Modal.Footer>
         </Modal>

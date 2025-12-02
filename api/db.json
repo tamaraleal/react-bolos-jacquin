@@ -1,37 +1,11 @@
 {
-  "users": [    {
+  "users": [
+    {
       "email": "jacquin@bolos.com",
       "senha": "1234"
     }
   ],
   "bolos": [
-    {
-      "nome": "Chocolate Belga",
-      "categorias": [
-        "chocolate"
-      ],
-      "descricao": "Bolo macio de chocolate, aplicado granulado que traz crocância e um sabor irresistível.",
-      "imagens": [
-        "3458546845741.png"
-      ],
-      "id": "f5r1",
-      "preco": 50,
-      "peso": 1.5
-    },
-    {
-      "nome": "Chocolate com Ninho",
-      "categorias": [
-        "destaques",
-        "chocolate"
-      ],
-      "descricao": "Bolo macio de chocolate com creme de leite Ninho, um sabor irresistível.",
-      "imagens": [
-        ""
-      ],
-      "id": "a38h",
-      "preco": 59.99,
-      "peso": 1.2
-    },
     {
       "nome": "Cenoura com Chocolate",
       "categorias": [

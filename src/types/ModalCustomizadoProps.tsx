@@ -3,7 +3,7 @@ export interface ModalCustomizadoProps {
     aoCancelar: () => void; // funcao vazia
     titulo: string;
     corpo: string | React.ReactNode; // propriedade propria do react
-    textoBotaoComfimacao?: string; // ? = pode ou nao ser fornecido (opicional)
+    textoBotaoConfimacao?: string; // ? = pode ou nao ser fornecido (opicional)
     textoBotaoCancelamento?: string;
     aoConfirmar?: () => void;
     customizarBotoes?: boolean;
