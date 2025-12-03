@@ -3,7 +3,7 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import './Cadastro.css'
 import type { Bolos } from '../../types/Bolo';
-import { deleteBolo, getBolos } from '../../services/bolosService';
+import { deleteBolo, enviarFotoParaAPI, getBolos, postBolo } from '../../services/bolosService';
 import { formatosServices } from '../../services/formatosServices';
 import ModalCustomizado from '../../components/ModalCustomizado/ModalCustomizado';
 import { NumericFormat } from 'react-number-format';
@@ -73,6 +73,54 @@ export default function Cadastro() {
         }
     }
 
+    const limparDados = () => {
+        setNomeBolo("");
+        setCategorias("");
+        setImage(undefined);
+        setPreco(undefined);
+        setPeso(undefined);
+        setDescricao("");
+        setBgImageInputColor(" #FFFFFF");
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => { //ao se comunicar com a api voce precisa fazer funções assincronas (async)
+        e.preventDefault(); //preventDefault: ignora o comportamento padrao do html, ele ignora a atualização da página
+        if (!nomeBolo || !categorias || !preco) { //se eu não preecher um desses campos vai acontecer:
+            exibirModalDeErroOuSucesso("Campos Obrigatórios", "Preencha o nome, categorias e preço do bolo");
+            return;
+        }
+
+        let uploadedFileName: string | undefined;
+
+        if (imagem) {
+            uploadedFileName = await enviarFotoParaAPI(imagem);
+            if (!uploadedFileName) {
+                exibirModalDeErroOuSucesso("Erro", "Cadastro cancelado por falha no upload da imagem.");
+                return; //encerra o fluxo da função 
+            }
+        }
+
+        const novoBolo: Bolos = {
+            id: undefined,
+            nome: nomeBolo,
+            descricao: descricao,
+            preco: preco,
+            peso: peso ?? null,
+            categorias: categorias.toLowerCase().split(",").map(c => c.trim()), // trim: remove espaços em branco
+            imagens: uploadedFileName ? [uploadedFileName] : []
+        }
+
+        try {
+            await postBolo(novoBolo)
+            exibirModalDeErroOuSucesso("Sucesso", "Novo bolo cadastrado com sucesso!");
+            fetchBolos();
+            limparDados();
+        } catch (error) {
+            exibirModalDeErroOuSucesso("Erro", "Erro ao cadastrar o novo bolo")
+        }
+    }
+
+
     useEffect(() => {
         fetchBolos();
     }, [])
@@ -84,7 +132,7 @@ export default function Cadastro() {
             <main>
                 <h1 className="acessivel">tela de cadastro e listagem de produtos</h1>
 
-                <section className="container_cadastro">
+                <form onSubmit={handleSubmit} className="container_cadastro">
                     <h2>Cadastro</h2>
                     <hr />
 
@@ -116,7 +164,7 @@ export default function Cadastro() {
                                 <div className="img">
                                     <label htmlFor="img">
                                         <span>Imagem</span>
-                                        <div>
+                                        <div style={{ backgroundColor: bgImageInputColor }}>
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 448 512">
                                                 <path fill="currentColor"
@@ -183,7 +231,7 @@ export default function Cadastro() {
                         </div>
                     </div>
                     <button className='botaoSubmit' type='submit'>Cadastrar</button>
-                </section>
+                </form>
 
                 <section className="container_lista">
                     <h2>Lista</h2>
